@@ -1,0 +1,39 @@
+baseURL = "https://santiagoaguero.com/"
+locale = "en"
+title = "Santi Agüero"
+disableKinds = ["taxonomy", "term"]
+
+[privacy]
+  [privacy.disqus]
+    disable = true
+  [privacy.googleAnalytics]
+    disable = true
+  [privacy.instagram]
+    disable = true
+  [privacy.x]
+    disable = true
+  [privacy.vimeo]
+    disable = true
+  [privacy.youtube]
+    disable = true
+
+[params]
+  description = "Have you tried apagarlo y prenderlo again?"
+
+[taxonomies]
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = false
+    [markup.goldmark.extensions]
+      [markup.goldmark.extensions.typographer]
+        disable = false
+
+[outputs]
+  home = ["HTML"]
+  section = ["HTML"]
+
+[caches]
+  [caches.images]
+    dir = ":cacheDir/images"

@@ -1,0 +1,59 @@
+{{ define "head" }}
+<style>
+  .post-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .post-item {
+    border-bottom: 1px dashed var(--rule);
+  }
+  .post-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 24px;
+    padding: 18px 0;
+    text-decoration: none;
+    color: var(--fg);
+    transition: color .15s;
+  }
+  .post-link:hover {
+    color: var(--accent);
+  }
+  .post-title {
+    font-family: var(--serif);
+    font-size: clamp(16px, 1.4vw, 19px);
+    font-weight: 600;
+    line-height: 1.4;
+  }
+  .post-date {
+    font-family: var(--serif);
+    font-size: 14px;
+    color: var(--muted);
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: color .15s;
+  }
+  .post-link:hover .post-date {
+    color: var(--accent);
+  }
+</style>
+{{ end }}
+
+{{ define "main" }}
+<div class="two-col">
+  {{ partial "sidebar.html" . }}
+
+  <ul class="post-list section-body">
+      {{- range (where .Pages "Draft" false).ByDate.Reverse }}
+      <li class="post-item">
+        <a class="post-link" href="{{ .RelPermalink }}">
+          <span class="post-title">{{ .Title }}</span>
+          <time class="post-date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>
+        </a>
+      </li>
+      {{- end }}
+  </ul>
+</div>
+{{ end }}

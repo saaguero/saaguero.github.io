@@ -1,0 +1,57 @@
+# Hugo
+public/
+resources/_gen/
+.hugo_build.lock
+
+# Dependencies
+node_modules/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# npm cache (local)
+.npm
+
+# Optional REPL history
+.node_repl_history
+
+# Environment and secrets (never commit)
+.env
+.env.*
+!.env.example
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Editors / IDEs
+*.swp
+*.swo
+*~
+.idea/
+
+# Caches and tooling (common JS ecosystem)
+.eslintcache
+*.tsbuildinfo
+.parcel-cache/
+.turbo/
+.next/
+.nuxt/
+.cache/
+coverage/
+.nyc_output/
+
+# Optional local tooling
+.vercel/
+
+static/resume.pdf

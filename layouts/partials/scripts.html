@@ -1,0 +1,108 @@
+<script>
+  const _saved = (() => { try { return JSON.parse(localStorage.getItem("tweaks") || "{}"); } catch(_) { return {}; } })();
+  const TWEAKS = Object.assign({ "theme": "dark", "accent": "mate", "variant": "rule" }, _saved);
+
+  const ACCENTS = {
+    mate:  { dark: "oklch(0.74 0.13 135)", light: "oklch(0.48 0.13 135)" },
+    dulce: { dark: "oklch(0.78 0.11 70)",  light: "oklch(0.52 0.13 60)"  },
+    cielo: { dark: "oklch(0.80 0.10 225)", light: "oklch(0.52 0.13 225)" },
+  };
+
+  function apply(t) {
+    document.documentElement.setAttribute("data-theme", t.theme);
+    const a = (ACCENTS[t.accent] || ACCENTS.mate)[t.theme] || ACCENTS.mate.dark;
+    document.documentElement.style.setProperty("--accent", a);
+    document.body.setAttribute("data-variant", t.variant);
+    document.querySelectorAll(".seg").forEach(seg => {
+      const key = seg.dataset.key;
+      seg.querySelectorAll("button").forEach(btn => {
+        btn.classList.toggle("on", btn.dataset.val === t[key]);
+      });
+    });
+    try { localStorage.setItem("tweaks", JSON.stringify(t)); } catch(_) {}
+  }
+  apply(TWEAKS);
+
+  // Event delegation survives Turbo body swaps (script only evaluates once per unique content)
+  document.addEventListener("click", e => {
+    // Theme toggle
+    if (e.target.closest("#theme-toggle")) {
+      TWEAKS.theme = (TWEAKS.theme === "dark") ? "light" : "dark";
+      apply(TWEAKS);
+      try { window.parent.postMessage({ type: "__edit_mode_set_keys", edits: { theme: TWEAKS.theme } }, "*"); } catch (_) {}
+      return;
+    }
+    // Tweaks panel segment buttons
+    const seg = e.target.closest(".seg");
+    const btn = e.target.closest("button");
+    if (seg && btn && seg.dataset.key) {
+      TWEAKS[seg.dataset.key] = btn.dataset.val;
+      apply(TWEAKS);
+      try { window.parent.postMessage({ type: "__edit_mode_set_keys", edits: { [seg.dataset.key]: btn.dataset.val } }, "*"); } catch (_) {}
+    }
+  });
+
+  // Re-apply state after each Turbo navigation (new body, same TWEAKS in memory)
+  document.addEventListener("turbo:load", () => apply(TWEAKS));
+
+  window.addEventListener("message", e => {
+    const d = e.data || {};
+    if (d.type === "__activate_edit_mode") document.getElementById("tweaks").classList.add("on");
+    if (d.type === "__deactivate_edit_mode") document.getElementById("tweaks").classList.remove("on");
+  });
+  try { window.parent.postMessage({ type: "__edit_mode_available" }, "*"); } catch (_) {}
+
+
+  // SLO popover
+  const slo = document.querySelector(".slo");
+  const sloPop = slo ? slo.querySelector(".slo-pop") : null;
+  if (slo && sloPop) {
+    let sloCloseTimer;
+    const openSlo = () => { clearTimeout(sloCloseTimer); slo.classList.add("is-open"); };
+    const closeSlo = () => { clearTimeout(sloCloseTimer); sloCloseTimer = setTimeout(() => slo.classList.remove("is-open"), 90); };
+    [slo, sloPop].forEach(el => {
+      el.addEventListener("mouseenter", openSlo);
+      el.addEventListener("mouseleave", closeSlo);
+    });
+    slo.addEventListener("blur", () => slo.classList.remove("is-open"), true);
+  }
+
+  // Copy SLO table
+  const copySloBtn = document.getElementById("copy-slo");
+  const copySloMsg = document.getElementById("copy-slo-msg");
+  function getSloCsvForSlack() {
+    const table = document.querySelector(".slo-table");
+    if (!table) return "";
+    const normalize = txt => txt.replace(/\s+/g, " ").trim();
+    const escapeCsv = txt => { const cleaned = normalize(txt); if (/[",\n]/.test(cleaned)) return `"${cleaned.replace(/"/g, '""')}"`; return cleaned; };
+    const lines = [];
+    const headers = Array.from(table.querySelectorAll("thead th")).map(th => escapeCsv(th.textContent || ""));
+    lines.push(headers.join(","));
+    table.querySelectorAll("tbody tr").forEach(tr => {
+      const cols = Array.from(tr.querySelectorAll("td")).map(td => escapeCsv(td.textContent || ""));
+      lines.push(cols.join(","));
+    });
+    return lines.join("\n");
+  }
+  async function copyText(text) {
+    if (navigator.clipboard && navigator.clipboard.writeText) { await navigator.clipboard.writeText(text); return; }
+    const ta = document.createElement("textarea");
+    ta.value = text; ta.setAttribute("readonly", ""); ta.style.position = "absolute"; ta.style.left = "-9999px";
+    document.body.appendChild(ta); ta.select(); document.execCommand("copy"); document.body.removeChild(ta);
+  }
+  if (copySloBtn && copySloMsg) {
+    let copyMsgTimer;
+    copySloBtn.addEventListener("click", async () => {
+      try { await copyText(getSloCsvForSlack()); copySloMsg.textContent = "Copied!"; }
+      catch (_) { copySloMsg.textContent = "Copy failed"; }
+      copySloMsg.classList.add("show");
+      clearTimeout(copyMsgTimer);
+      copyMsgTimer = setTimeout(() => copySloMsg.classList.remove("show"), 1500);
+    });
+  }
+
+  // Drifting latency
+  const vals = ["p99 · 46ms", "p99 · 48ms", "p99 · 49ms", "p99 · 47ms", "p99 · 51ms"];
+  let i = 0;
+  setInterval(() => { i = (i + 1) % vals.length; const el = document.getElementById("status"); if (el) el.textContent = vals[i]; }, 3800);
+</script>

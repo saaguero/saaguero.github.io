@@ -1,0 +1,229 @@
+{
+  "meta": {
+    "theme": "elegant"
+  },
+  "basics": {
+    "name": "Santi Agüero",
+    "label": "SRE and DevOps",
+    "url": "https://santiagoaguero.com",
+    "summary": "Information System Engineer with a strong interest in the technical field as well as project management. I look for jobs with opportunities to grow both as a professional and as a person.",
+    "email": "contact@santiagoaguero.com",
+    "location": {
+      "countryCode": "AR",
+      "region": "Argentina"
+    },
+    "profiles": [
+      {
+        "network": "LinkedIn",
+        "username": "saaguero",
+        "url": "https://ar.linkedin.com/in/saaguero"
+      },
+      {
+        "network": "GitHub",
+        "username": "saaguero",
+        "url": "https://github.com/saaguero"
+      },
+      {
+        "network": "YouTube",
+        "username": "saaguero",
+        "url": "https://www.youtube.com/@santiagoague"
+      }
+    ]
+  },
+  "work": [
+    {
+      "name": "Zype",
+      "position": "SRE and DevOps",
+      "url": "https://www.zype.com",
+      "startDate": "2021-10-01",
+      "highlights": [
+        "Implemented the Google SRE culture and practices across teams, after 6 months, 10 microservices started to improve by around 20% in terms of latency and availability.",
+        "Orchestrated a Varnish caching layer handling 1M requests/minute for video streaming using AWS Elemental.",
+        "Worked as a Data Engineer to improve the Data Pipeline implemented in GCP BigQuery. Costs were reduced by 50% leveraging DBT and the BigQuery Flex Slot cost model.",
+        "Worked as a Security Engineer, to address major points to achieve SOC 2 compliance."
+      ]
+    },
+    {
+      "name": "YouTube / Medium",
+      "position": "Technical Channel and Blog",
+      "url": "https://www.youtube.com/@santiagoague",
+      "startDate": "2020-05-01",
+      "highlights": [
+        "Youtube channel and blog with nerdy things like Vim, DevOps, and SRE well received by the public."
+      ]
+    },
+    {
+      "name": "DevGurus",
+      "position": "Senior DevOps",
+      "startDate": "2020-07-01",
+      "endDate": "2021-10-01",
+      "highlights": [
+        "Worked as a Senior DevOps for customers like Walmart and Falabella.",
+        "Led infrastructure scalable designs, to handle events like Black Fridays; from the ground up, using AWS, GCP, Azure, Cloudflare; Terraform, Kubernetes, Istio, and Vault.",
+        "Worked in pairs with developers, fostering a DevOps culture plus helping and learning with them in projects that involved Node.js, React, Fastify, Next.js; Cypress, and k6 for performance testing."
+      ]
+    },
+    {
+      "name": "McAfee",
+      "position": "DevOps",
+      "startDate": "2018-05-01",
+      "endDate": "2020-06-01",
+      "highlights": [
+        "Worked as a DevOps in a cloud-based security product, in charge of detecting threats in real-time, from the telemetry data sent by thousands of devices. CI/CD was implemented in Teamcity.",
+        "Led the process, documentation, and implementation for porting the product into AWS gov-cloud region, as a requisite for closing a deal with the US government (FedRAMP compliance)."
+      ]
+    },
+    {
+      "name": "McAfee",
+      "position": "Software Engineer",
+      "startDate": "2017-04-01",
+      "endDate": "2018-04-01",
+      "highlights": [
+        "Java developer in main components for the McAfee Threat Intelligence Exchange product.",
+        "Led and implemented the product installer for Linux using RPM.",
+        "Led and implemented PostgreSQL Primary/Secondary model for High Availability.",
+        "Built a performance framework solution with Prometheus, StatsD, Grafana, and JMeter."
+      ]
+    },
+    {
+      "name": "Intel Corporation",
+      "position": "Software Engineer",
+      "startDate": "2011-02-01",
+      "endDate": "2017-02-01",
+      "highlights": [
+        "Python and C++ developer in main components for the Intel Update Manager product, reaching millions of users, as it was pre-installed as part of the OEM process with HP, Dell, and others.",
+        "Led and implemented the product installer for Windows using WiX."
+      ]
+    },
+    {
+      "name": "Intel Corporation",
+      "position": "Technical Marketing Engineer",
+      "startDate": "2013-01-01",
+      "endDate": "2013-12-01",
+      "highlights": [
+        "Gave training in Mexico and Colombia for strategic Intel innovations, both development in Android with Intel-based processors and development in Windows 8 for Intel ultrabooks."
+      ]
+    },
+    {
+      "name": "Universidad UTN",
+      "position": "System Design Teacher",
+      "startDate": "2012-01-01",
+      "endDate": "2012-12-01",
+      "highlights": [
+        "Taught students for the leading career subject, software and system design."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "institution": "UTN",
+      "area": "System Engineer",
+      "studyType": "Bachelor's degree",
+      "startDate": "2006-01-01",
+      "endDate": "2011-01-01",
+      "score": "Graduated with honors"
+    }
+  ],
+  "skills": [
+    {
+      "name": "Cloud & Infrastructure",
+      "keywords": [
+        "AWS (Certified Solutions Architect)",
+        "GCP",
+        "Azure",
+        "Cloudflare"
+      ]
+    },
+    {
+      "name": "Orchestration & Containers",
+      "keywords": [
+        "Kubernetes (Certified CKAD)",
+        "Docker",
+        "Helm",
+        "Istio",
+        "Vagrant"
+      ]
+    },
+    {
+      "name": "IaC & Configuration",
+      "keywords": ["Terraform", "Ansible", "Chef", "Vault", "Packer"]
+    },
+    {
+      "name": "CI/CD & DevOps",
+      "keywords": [
+        "GitHub Actions",
+        "GitLab CI",
+        "Jenkins",
+        "CircleCI",
+        "TeamCity",
+        "Bitbucket",
+        "GitOps"
+      ]
+    },
+    {
+      "name": "Programming & Scripting",
+      "keywords": [
+        "Python",
+        "Go",
+        "Java",
+        "C++",
+        "Bash",
+        "PowerShell",
+        "NodeJS"
+      ]
+    },
+    {
+      "name": "Observability & Performance",
+      "keywords": [
+        "Prometheus",
+        "Grafana",
+        "ELK Stack",
+        "Zabbix",
+        "k6",
+        "JMeter"
+      ]
+    },
+    {
+      "name": "Databases & Caching",
+      "keywords": [
+        "PostgreSQL",
+        "MySQL",
+        "MongoDB",
+        "Redis",
+        "InfluxDB",
+        "Varnish"
+      ]
+    },
+    {
+      "name": "Security & Compliance",
+      "keywords": ["SOC 2", "Threat Modelling", "12-factor app"]
+    },
+    {
+      "name": "Methodologies",
+      "keywords": ["Agile", "Scrum", "Kanban", "XP", "TDD", "API Design"]
+    }
+  ],
+  "languages": [
+    {
+      "language": "Spanish",
+      "fluency": "Native"
+    },
+    {
+      "language": "English",
+      "fluency": "Professional"
+    }
+  ],
+  "awards": [
+    {
+      "title": "First escort"
+    },
+    {
+      "title": "Standard-bearer"
+    }
+  ],
+  "publications": [
+    {
+      "name": "Encriptador"
+    }
+  ]
+}
