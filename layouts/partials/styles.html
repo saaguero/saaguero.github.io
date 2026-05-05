@@ -430,4 +430,16 @@
   .fade-up.d3 { animation-delay: .32s; }
   .fade-up.d4 { animation-delay: .46s; }
   @keyframes fu { to { opacity: 1; transform: none; } }
+
+  @media print {
+    @page {
+      size: A4;
+      margin: 12mm;
+    }
+    html, body {
+      background: #fff;
+      color: #000;
+    }
+    .stage::before { display: none; }
+  }
 </style>
