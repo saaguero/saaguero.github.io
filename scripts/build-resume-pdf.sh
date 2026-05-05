@@ -41,9 +41,14 @@ fi
 
 echo "→ Printing to PDF..."
 "$CHROME" \
-  --headless=new \
+  --headless=old \
   --no-sandbox \
+  --disable-setuid-sandbox \
   --disable-gpu \
+  --disable-dev-shm-usage \
+  --no-first-run \
+  --no-default-browser-check \
+  --disable-extensions \
   --allow-file-access-from-files \
   --run-all-compositor-stages-before-draw \
   --print-to-pdf="$PDF_OUT" \
