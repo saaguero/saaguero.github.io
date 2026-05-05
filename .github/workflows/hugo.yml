@@ -71,10 +71,14 @@ jobs:
       - name: Install Node.js dependencies
         run: |
           [[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true
-      - name: Install Chromium
+      - name: Install Google Chrome
         run: |
           sudo apt-get update
-          sudo apt-get install -y chromium
+          sudo apt-get install -y wget gnupg
+          wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo gpg --dearmor -o /usr/share/keyrings/google-linux-signing-keyring.gpg
+          echo "deb [arch=amd64 signed-by=/usr/share/keyrings/google-linux-signing-keyring.gpg] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
       - name: Configure Git
         run: |
           git config core.quotepath false
@@ -88,7 +92,7 @@ jobs:
             hugo-
       - name: Build the site
         run: |
-          bash scripts/build-resume-pdf.sh
+          CHROME_PATH=/usr/bin/google-chrome-stable bash scripts/build-resume-pdf.sh
           hugo build \
             --gc \
             --minify \
