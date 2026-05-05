@@ -13,7 +13,9 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-HTML_TMP="$(mktemp /tmp/resume-XXXXXX.html)"
+TMP_DIR="${RUNNER_TEMP:-$ROOT/.tmp}"
+mkdir -p "$TMP_DIR"
+HTML_TMP="$(mktemp "$TMP_DIR/resume-XXXXXX.html")"
 PDF_OUT="$ROOT/static/resume.pdf"
 
 cleanup() { rm -f "$HTML_TMP"; }
@@ -42,10 +44,15 @@ echo "→ Printing to PDF..."
   --headless=new \
   --no-sandbox \
   --disable-gpu \
+  --allow-file-access-from-files \
   --run-all-compositor-stages-before-draw \
   --print-to-pdf="$PDF_OUT" \
   --no-pdf-header-footer \
   "file://$HTML_TMP"
 
 SIZE=$(stat -f%z "$PDF_OUT" 2>/dev/null || stat -c%s "$PDF_OUT")
+if [ "$SIZE" -le 1024 ]; then
+  echo "→ Error: generated PDF is too small (${SIZE} bytes)."
+  exit 1
+fi
 echo "→ Done: static/resume.pdf ($(( SIZE / 1024 )) KB)"
