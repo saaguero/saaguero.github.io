@@ -99,7 +99,7 @@ const html = `<!DOCTYPE html>
     padding: 0;
   }
 
-  @page { size: Letter; margin: 14mm 18mm; }
+  @page { size: A4; margin: 12mm; }
 
   /* ——— Header ——— */
   .header { margin-bottom: 8pt; }

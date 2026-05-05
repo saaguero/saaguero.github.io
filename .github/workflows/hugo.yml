@@ -95,7 +95,7 @@ jobs:
       - name: Generate resume PDF
         uses: fifsky/html-to-pdf-action@master
         with:
-          htmlFile: "${{ runner.temp }}/resume.html"
+          htmlFile: "file://${{ runner.temp }}/resume.html"
           outputFile: ./public/resume.pdf
           pdfOptions: '{"format":"A4","margin":{"top":"12mm","left":"12mm","right":"12mm","bottom":"12mm"}}'
       - name: Cache save
