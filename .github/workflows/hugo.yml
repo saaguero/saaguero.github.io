@@ -94,6 +94,10 @@ jobs:
             --minify \
             --baseURL "${{ steps.pages.outputs.base_url }}/" \
             --cacheDir "${{ runner.temp }}/hugo_cache"
+      - name: Stage resume PDF
+        run: |
+          test -f static/resume.pdf
+          cp -f static/resume.pdf public/resume.pdf
       - name: Cache save
         id: cache-save
         uses: actions/cache/save@v5

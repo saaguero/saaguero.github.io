@@ -86,9 +86,10 @@
     font-size: clamp(15px, 1.2vw, 17px);
     line-height: 1.75;
   }
-  .skill-row { display: flex; gap: 5px; flex-wrap: wrap; }
-  .skill-name { font-weight: 600; color: var(--fg); }
-  .skill-kws { color: var(--muted); }
+  .skill-row { margin-bottom: 10px; }
+  .skill-row:last-child { margin-bottom: 0; }
+  .skill-name { font-weight: 600; color: var(--fg); display: block; }
+  .skill-kws { color: var(--muted); display: block; margin-top: 4px; }
 
   .edu-item { margin-bottom: 14px; }
   .edu-item:last-child { margin-bottom: 0; }
@@ -178,8 +179,8 @@
       <div class="skills-list">
         {{ range . }}
         <div class="skill-row">
-          <span class="skill-name">{{ .name }}:</span>
-          <span class="skill-kws">{{ delimit .keywords ", " }}</span>
+          <div class="skill-name">{{ .name }}:</div>
+          <div class="skill-kws">{{ delimit .keywords ", " }}</div>
         </div>
         {{ end }}
       </div>
